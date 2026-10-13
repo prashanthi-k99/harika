@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Brand Dashboard | LinkFluence{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <p class="eyebrow">BRAND WORKSPACE</p>
+
+    <h1>Your campaign dashboard.</h1>
+
+    <p>Review your saved campaigns and their creator matches.</p>
+
+    <a
+        class="button primary"
+        href="{{ url_for('campaigns.create_campaign') }}"
+    >
+        + New Campaign
+    </a>
+
+    <div class="dashboard-grid">
+
+        <article class="stat-card">
+            <span>Total campaigns</span>
+            <strong>{{ campaigns | length }}</strong>
+        </article>
+
+    </div>
+
+    <div class="campaign-list">
+
+        {% for campaign in campaigns %}
+
+        <article class="campaign-row">
+
+            <div>
+
+                <h3>{{ campaign.title }}</h3>
+
+                <p>{{ campaign.brand_name }}</p>
+
+                <p>
+                    {{ campaign.niche }} · {{ campaign.platform }}
+                </p>
+
+                <p>
+                    Budget: ₹{{ "{:,.0f}".format(campaign.budget) }}
+                </p>
+
+            </div>
+
+            <a
+                class="button secondary"
+                href="{{ url_for('campaigns.campaign_results', campaign_id=campaign.id) }}"
+            >
+                View Matches
+            </a>
+
+        </article>
+
+        {% else %}
+
+        <p>No campaigns created yet. Start with your first brief.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

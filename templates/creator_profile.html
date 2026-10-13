@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ creator.name }} | LinkFluence{% endblock %}
+
+{% block content %}
+
+<section class="profile-card">
+
+    <div class="avatar large">
+        {{ creator.name[0] | upper }}
+    </div>
+
+    <p class="eyebrow">CREATOR PROFILE</p>
+
+    <h1>{{ creator.name }}</h1>
+
+    <p class="muted">@{{ creator.username }}</p>
+
+    <p>{{ creator.bio }}</p>
+
+    <div class="profile-stats">
+
+        <div>
+            <strong>{{ "{:,}".format(creator.followers) }}</strong>
+            <span>Followers</span>
+        </div>
+
+        <div>
+            <strong>{{ creator.engagement_rate }}%</strong>
+            <span>Engagement</span>
+        </div>
+
+        <div>
+            <strong>₹{{ "{:,.0f}".format(creator.price_per_post) }}</strong>
+            <span>Starting rate per post</span>
+        </div>
+
+    </div>
+
+    <p><strong>Niche:</strong> {{ creator.niche }}</p>
+
+    <p><strong>Platform:</strong> {{ creator.platform }}</p>
+
+    <p><strong>Location:</strong> {{ creator.location }}</p>
+
+    <a
+        class="button primary"
+        href="{{ url_for('campaigns.create_campaign') }}"
+    >
+        Create a Campaign
+    </a>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}LinkFluence{% endblock %}</title>
+
+    <meta name="description"
+          content="LinkFluence connects brands with the right content creators using smart matching technology.">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="{{ url_for('home') }}" class="logo">
+                Link<span>Fluence</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="{{ url_for('home') }}">Home</a>
+
+                <a href="{{ url_for('creator.list_creators') }}">
+                    Creators
+                </a>
+
+                <a href="{{ url_for('campaign.create_brief') }}">
+                    Find Creators
+                </a>
+            </nav>
+
+            <div class="nav-buttons">
+                <a href="{{ url_for('creator.list_creators') }}"
+                   class="btn btn-outline">
+                    Explore
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>Link<span>Fluence</span> ✦</h2>
+
+                <p>
+                    Connecting brands with creators.
+                    Building meaningful collaborations.
+                </p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2026 LinkFluence.
+                    All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

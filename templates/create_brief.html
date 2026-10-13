@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Create Campaign | LinkFluence{% endblock %}
+
+{% block content %}
+
+<section class="form-section">
+
+    <p class="eyebrow">CAMPAIGN BUILDER</p>
+
+    <h1>Tell us about your campaign.</h1>
+
+    <p>
+        Add your requirements to discover compatible creators.
+    </p>
+
+    <form method="POST" class="campaign-form">
+
+        <label for="brand_name">Brand name</label>
+
+        <input
+            id="brand_name"
+            name="brand_name"
+            required
+            maxlength="120"
+            placeholder="Your brand"
+            value="{{ request.form.get('brand_name', '') }}"
+        >
+
+        <label for="title">Campaign title</label>
+
+        <input
+            id="title"
+            name="title"
+            required
+            maxlength="150"
+            placeholder="Summer collection launch"
+            value="{{ request.form.get('title', '') }}"
+        >
+
+        <label for="description">Campaign description</label>
+
+        <textarea
+            id="description"
+            name="description"
+            required
+            placeholder="Describe your campaign..."
+        >{{ request.form.get('description', '') }}</textarea>
+
+        <label for="niche">Creator niche</label>
+
+        <select id="niche" name="niche" required>
+
+            {% for item in [
+                'Fashion',
+                'Technology',
+                'Food',
+                'Travel',
+                'Dance',
+                'Fitness',
+                'Beauty',
+                'Education'
+            ] %}
+
+            <option
+                value="{{ item }}"
+                {% if request.form.get('niche') == item %}
+                selected
+                {% endif %}
+            >
+                {{ item }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <label for="platform">Preferred platform</label>
+
+        <select id="platform" name="platform" required>
+
+            {% for item in ['Instagram', 'YouTube', 'TikTok'] %}
+
+            <option
+                value="{{ item }}"
+                {% if request.form.get('platform') == item %}
+                selected
+                {% endif %}
+            >
+                {{ item }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <label for="budget">Budget per creator (₹)</label>
+
+        <input
+            id="budget"
+            name="budget"
+            type="number"
+            min="1"
+            step="0.01"
+            required
+            value="{{ request.form.get('budget', '') }}"
+        >
+
+        <label for="min_followers">Minimum followers</label>
+
+        <input
+            id="min_followers"
+            name="min_followers"
+            type="number"
+            min="0"
+            value="{{ request.form.get('min_followers', '0') }}"
+        >
+
+        <label for="min_engagement">Minimum engagement (%)</label>
+
+        <input
+            id="min_engagement"
+            name="min_engagement"
+            type="number"
+            min="0"
+            max="100"
+            step="0.1"
+            value="{{ request.form.get('min_engagement', '0') }}"
+        >
+
+        <button class="button primary full-width" type="submit">
+            Find My Best Matches
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

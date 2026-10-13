@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Creator Matches | LinkFluence{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <p class="eyebrow">MATCH RESULTS</p>
+
+    <h1>Your campaign matches.</h1>
+
+    <div class="campaign-summary">
+
+        <h2>{{ campaign.title }}</h2>
+
+        <p>{{ campaign.brand_name }}</p>
+
+        <p>
+            {{ campaign.niche }} · {{ campaign.platform }}
+        </p>
+
+        <p>
+            Budget: ₹{{ "{:,.0f}".format(campaign.budget) }}
+        </p>
+
+    </div>
+
+    <div class="creator-grid">
+
+        {% for match in matches %}
+
+        <article class="creator-card">
+
+            <div class="match-score">
+                {{ match.score }}<small>/100</small>
+            </div>
+
+            <h3>{{ match.creator.name }}</h3>
+
+            <p class="muted">
+                {{ match.creator.niche }} ·
+                {{ match.creator.platform }}
+            </p>
+
+            <p>
+                {{ "{:,}".format(match.creator.followers) }}
+                followers
+            </p>
+
+            <p>
+                {{ match.creator.engagement_rate }}% engagement
+            </p>
+
+            <h4>Why this creator?</h4>
+
+            <ul class="reason-list">
+
+                {% for reason in match.reasons %}
+
+                <li>{{ reason }}</li>
+
+                {% else %}
+
+                <li>Some campaign requirements need further review.</li>
+
+                {% endfor %}
+
+            </ul>
+
+            <a
+                class="button secondary full-width"
+                href="{{ url_for('creators.creator_profile', creator_id=match.creator.id) }}"
+            >
+                View Creator
+            </a>
+
+        </article>
+
+        {% else %}
+
+        <p>No creators have been added yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <a
+        class="button primary"
+        href="{{ url_for('campaigns.create_campaign') }}"
+    >
+        Create Another Campaign
+    </a>
+
+</section>
+
+{% endblock %}

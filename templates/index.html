@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}LinkFluence | AI Creator Marketplace{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            THE SMARTER CREATOR MARKETPLACE
+        </span>
+
+        <h1>
+            Find Your Perfect Creator.
+            <br>
+            <span>Build Meaningful Influence.</span>
+        </h1>
+
+        <p>
+            LinkFluence connects brands with the right content creators
+            using smart matching technology. Discover creators, launch
+            campaigns, and build powerful collaborations.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('creators.list_creators') }}"
+               class="btn btn-primary">
+                Find My Creators
+            </a>
+
+            <a href="{{ url_for('creators.list_creators') }}"
+               class="btn btn-secondary">
+                Explore Creators
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Features Section -->
+<section class="features">
+    <div class="section-heading">
+        <h2>Why Choose LinkFluence?</h2>
+        <p>Smarter connections. Better collaborations. Bigger impact.</p>
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Smart Discovery</h3>
+            <p>
+                Discover creators who match your brand,
+                audience, niche, and campaign goals.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Intelligent Matching</h3>
+            <p>
+                Find suitable creators and make meaningful
+                brand collaborations easier.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>Better Collaborations</h3>
+            <p>
+                Create campaigns, connect with creators,
+                and grow your brand through influence.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Featured Creators Section -->
+<section class="creators-section">
+
+    <div class="section-heading">
+        <h2>Creators Worth Discovering</h2>
+        <p>Meet creators who can bring your brand's vision to life.</p>
+    </div>
+
+    <div class="creator-grid">
+
+        {% if creators %}
+
+            {% for creator in creators %}
+
+            <div class="creator-card">
+
+                <div class="creator-avatar">
+                    {{ creator.username[0]|upper }}
+                </div>
+
+                <h3>{{ creator.username }}</h3>
+
+                <p class="creator-category">
+                    {{ creator.niche if creator.niche else 'Content Creator' }}
+                </p>
+
+                <a href="{{ url_for('creators.list_creators') }}"
+                   class="creator-link">
+                    View Profile →
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-creators">
+                <h3>Creators Are Coming Soon!</h3>
+                <p>Be among the first to explore our creator community.</p>
+
+                <a href="{{ url_for('creators.list_creators') }}"
+                   class="btn btn-primary">
+                    Explore Creators
+                </a>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- Call To Action -->
+<section class="cta-section">
+
+    <h2>Ready to Create Something Powerful?</h2>
+
+    <p>
+        Whether you're a brand looking for talent or a creator
+        ready to grow, your next opportunity starts here.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="{{ url_for('creators.list_creators') }}"
+           class="btn btn-primary">
+            Join the Community
+        </a>
+
+        <a href="{{ url_for('campaigns.create_campaign') }}"
+           class="btn btn-secondary">
+            Create a Campaign
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
